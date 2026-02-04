@@ -24,15 +24,3 @@ function print([city,day]){
 }
 print.apply(user, ['hyd','tuesday']);
 
-
-let a = void 0;
-let b = undefined;
-let c = void (b = 1);
-let d = null;
-
-console.log(
-  a === b,
-  c === b,
-  a == c,
-  b == d
-);
