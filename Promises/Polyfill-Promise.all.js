@@ -1,19 +1,18 @@
 //5. Promise.all polyfill with rejection handling
 
-Promise.all = function(...args){
+Promise.all = function(args){
     let arr = [];
     let cnt = 0;
     
     return new Promise((resolve, reject) => {
         
-        for(let i = 0; i<args[0].length; i++){
-            let p = args[0][i];
+        for(let i = 0; i<args.length; i++){
             
-            p.then((val) => {
+            Promise.resolve(args[i]).then((val) => {
                 arr[i] = val;
                 cnt++;
                 
-                if(cnt === args[0].length)
+                if(cnt === args.length)
                     resolve(arr);
             })
             .catch(e => reject(e));

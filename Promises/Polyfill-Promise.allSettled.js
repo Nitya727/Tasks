@@ -1,30 +1,29 @@
 //6. Promise.allSettled polyfill returning status objects
 
-Promise.allSettled = function (...args) {
+Promise.allSettled = function (args) {
     let arr = [];
     let cnt = 0;
 
     return new Promise((resolve, reject) => {
 
-        if (args[0].length === 0) {
+        if (args.length === 0) {
             resolve([]);
         }
 
-        for (let i = 0; i < args[0].length; i++) {
-            let p = args[0][i];
+        for (let i = 0; i < args.length; i++) {
 
-            p.then((val) => {
+            Promise.resolve(args[i]).then((val) => {
                 arr[i] = { status: 'fulfilled', value: val };
 
                 cnt++;
-                if (cnt === args[0].length)
+                if (cnt === args.length)
                     resolve(arr);
             })
                 .catch(e => {
                     arr[i] = { status: 'rejected', reason: e };
 
                     cnt++;
-                    if (cnt === args[0].length)
+                    if (cnt === args.length)
                         resolve(arr);
                 });
 

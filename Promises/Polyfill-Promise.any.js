@@ -8,9 +8,7 @@ Promise.any = function (args) {
     return new Promise((resolve, reject) => {
 
         for (let i = 0; i < args.length; i++) {
-            let p = args[i];
-
-            p.then((val) => {
+            Promise.resolve(args[i]).then((val) => {
                 resolve(val);
             })
                 .catch(e => {
@@ -31,7 +29,7 @@ let p1 = new Promise((resolve, reject) => {
 
     setTimeout(() => {
 
-        reject('p1 resolved');
+        resolve('p1 resolved');
 
     }, 4000);
 
@@ -41,7 +39,7 @@ let p2 = new Promise((resolve, reject) => {
 
     setTimeout(() => {
 
-        reject('p2 resolved');
+        resolve('p2 resolved');
 
     }, 5000);
 
@@ -51,12 +49,12 @@ let p3 = new Promise((resolve, reject) => {
 
     setTimeout(() => {
 
-        reject('p3 resolved');
+        resolve('p3 resolved');
 
     }, 3000);
 
 });
 
-const p = Promise.any([p1, p2, p3]);
+const p = Promise.any([10, 20, 30]);
 p.then((data) => console.log(data))
     .catch(e => console.log(e));
