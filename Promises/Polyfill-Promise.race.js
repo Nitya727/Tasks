@@ -12,15 +12,15 @@ Promise.race = function(...args){
             
             p.then((val) => {
                 
-                cnt++;
-                if(cnt === 1)
+                // cnt++;
+                // if(cnt === 1)
                     resolve(val);
             })
             .catch(e => {
                 
-                cnt++;
-                if(cnt === 1)
-                    resolve(e);
+                // cnt++;
+                // if(cnt === 1)
+                    reject(e);
             });
             
             
